@@ -1,0 +1,25 @@
+-- models/ex_trader_virtual_submittal.sql
+
+{{ config(materialized='table') }}
+
+SELECT
+	ISO, 
+	ENTITY,
+	TRADER,
+	ISO_USER_ID,
+	TRADE_DATE,
+	TRADE_DATE_TIMEZONE,
+	TRADE_DATETIME_UTC,
+	PRICE_NODE_NAME,
+	PRICE_NODE_ID,
+	YE_PRICE_NODE_ID,
+	TRANSACTION_TYPE,
+	TRADE_HOUR,
+	TRANCHE,
+	MW,
+	BID,
+	TRANSACTION_ID,
+	IS_MULTIHOUR_BLOCK,
+	CREDIT
+FROM SOLEAPROD.BEYOND.VIRTUAL_SUBMITTAL_WITH_TRADER
+WHERE TRADER IN ({{ "'" + "', '".join(var('trader_list')) + "'" }})

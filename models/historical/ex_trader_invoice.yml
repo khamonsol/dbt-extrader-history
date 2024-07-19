@@ -1,0 +1,73 @@
+version: 2
+
+models:
+  - name: ex_trader_invoice  # Adjust the name to match your dbt model's filename without the .sql extension
+    description: "A table summarizing invoice-related information for trades, including charges and settlements."
+    columns:
+      - name: ISO	
+        description: "Identifier for the Independent System Operator (ISO) managing power flow and ensuring reliable electricity within its region."
+        tests:
+          - not_null
+
+      - name: ACCOUNT
+        description: "The account associated with the trade or transaction."
+        tests:
+          - not_null
+
+      - name: TRADER
+        description: "The username of the trader responsible for the transaction."
+        tests:
+          - not_null
+          - accepted_values:
+              values: [ 'ta', 'bbca', 'cfei2', 'aeolus', 'dkipke2', 'gcox', 'cfu2', 'dhao2', 'cfu','cmosley', 'tdigregorio', 'doverholt', 'pohair', 'dkipke', 'rmiller', 'trhodes','rtauer', 'dkozak', 'mlucas', 'msouthard', 'phennings', 'gborissov', 'cfei','jlogsdon', 'pmorris', 'wvanhoozer', 'nmahajan2', 'rmiller2', 'trinitytrader','jlandis', 'dhao', 'rross']
+
+      - name: ASSET_OWNER
+        description: "The owner of the asset involved in the trade."
+        tests:
+          - not_null
+
+      - name: STATEMENT_ID
+        description: "A unique identifier for the statement related to the trade."
+        tests:
+          - not_null
+
+      - name: STATEMENT_DATE
+        description: "The date of the statement issuance."
+        tests:
+          - not_null
+
+      - name: CHARGE_TYPE_CODE
+        description: "A code representing the type of charge applied to the trade."
+        tests:
+          - not_null
+
+      - name: CHARGE_TYPE_DESCRIPTION
+        description: "A descriptive explanation of the charge type code."
+        tests:
+          - not_null
+
+      - name: SETTLEMENT_TYPE_CODE
+        description: "A code indicating the type of settlement for the trade."
+        tests:
+          - not_null
+
+      - name: TRADE_DATE
+        description: "The date on which the trade was executed."
+        tests:
+          - not_null
+
+      - name: LINE_ITEM_ID
+        description: "A unique identifier for each line item in the invoice, related to individual charges or adjustments."
+        tests:
+          - not_null
+
+      - name: AMOUNT
+        description: "The monetary amount associated with the line item, which could be a charge or credit."
+        tests:
+          - not_null
+
+      - name: COMPANY_NAME
+        description: "The name of the company associated with the account or trade."
+        tests:
+          - not_null
+

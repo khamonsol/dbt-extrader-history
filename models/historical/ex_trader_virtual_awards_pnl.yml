@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: ex_trader_virtual_awards_pnl
+    description: "A table that aggregates virtual awards PNL data for specified traders."
+    columns:
+      - name: iso
+        description: "ISO identifier"
+        tests:
+          - not_null
+      - name: entity
+        description: "Entity name"
+        tests:
+          - not_null
+      - name: trader
+        description: "Trader name"
+        tests:
+          - not_null
+          - accepted_values:
+              values: [ 'ta', 'bbca', 'cfei2', 'aeolus', 'dkipke2', 'gcox', 'cfu2', 'dhao2', 'cfu','cmosley', 'tdigregorio', 'doverholt', 'pohair', 'dkipke', 'rmiller', 'trhodes','rtauer', 'dkozak', 'mlucas', 'msouthard', 'phennings', 'gborissov', 'cfei','jlogsdon', 'pmorris', 'wvanhoozer', 'nmahajan2', 'rmiller2', 'trinitytrader','jlandis', 'dhao', 'rross']
+
+      - name: iso_user_id
+        description: "ISO user identifier"
+        tests:
+          - not_null
+      - name: trade_date
+        description: "Date of the trade"
+        tests:
+          - not_null
+      - name: trade_datetime_utc
+        description: "UTC datetime of the trade"
+        tests:
+          - not_null
+      - name: price
+        description: "Trade price"
+        tests:
+          - not_null
+      - name: pnl
+        description: "Profit and Loss from the trade"
+        tests:
+          - not_null
+      - name: rt_lmp
+        description: "Real-Time Locational Marginal Pricing"
+      - name: da_lmp
+        description: "Day-Ahead Locational Marginal Pricing"

@@ -1,0 +1,98 @@
+version: 2
+
+models:
+  - name: ex_trader_virtual_submittal  # Adjust the name to match your dbt model's filename without the .sql extension
+    description: "A table detailing virtual energy trade submissions by traders."
+    columns:
+      - name: ISO
+        description: "Identifier for the Independent System Operator (ISO) that manages power flow and ensures reliable electricity within its region."
+        tests:
+          - not_null
+
+      - name: ENTITY
+        description: "The legal entity involved in the energy trading transaction."
+        tests:
+          - not_null
+
+      - name: TRADER
+        description: "The username of the trader responsible for the transaction."
+        tests:
+          - not_null
+          - accepted_values:
+              values: [ 'ta', 'bbca', 'cfei2', 'aeolus', 'dkipke2', 'gcox', 'cfu2', 'dhao2', 'cfu','cmosley', 'tdigregorio', 'doverholt', 'pohair', 'dkipke', 'rmiller', 'trhodes','rtauer', 'dkozak', 'mlucas', 'msouthard', 'phennings', 'gborissov', 'cfei','jlogsdon', 'pmorris', 'wvanhoozer', 'nmahajan2', 'rmiller2', 'trinitytrader','jlandis', 'dhao', 'rross']
+
+      - name: ISO_USER_ID
+        description: "A unique identifier for the user within the ISO's trading system."
+        tests:
+          - not_null
+
+      - name: TRADE_DATE
+        description: "The date the trade was executed, with no time component."
+        tests:
+          - not_null
+
+      - name: TRADE_DATE_TIMEZONE
+        description: "The timezone of the TRADE_DATE, indicating the regional market of the trade execution."
+        tests:
+          - not_null
+
+      - name: TRADE_DATETIME_UTC
+        description: "The timestamp of the trade execution, normalized to Coordinated Universal Time (UTC)."
+        tests:
+          - not_null
+
+      - name: PRICE_NODE_NAME
+        description: "The name of the pricing node or location on the energy grid where the trade's price is determined."
+        tests:
+          - not_null
+
+      - name: PRICE_NODE_ID
+        description: "A unique identifier for the pricing node within the ISO's grid network."
+        tests:
+          - not_null
+
+      - name: YE_PRICE_NODE_ID
+        description: "Yes Energy's specific identifier for the pricing node, used for integrating with Yes Energy data products."
+        tests:
+          - not_null
+
+      - name: TRANSACTION_TYPE
+        description: "The nature of the trade, e.g., purchase, sale."
+        tests:
+          - not_null
+
+      - name: TRADE_HOUR
+        description: "The hour of the day during which the trade is scheduled, typically in a 24-hour format."
+        tests:
+          - not_null
+
+      - name: TRANCHE
+        description: "A specific portion or slice of a larger transaction, often used in financial and energy markets."
+        tests:
+          - not_null
+
+      - name: MW
+        description: "The amount of energy, in Megawatts, involved in the trade."
+        tests:
+          - not_null
+
+      - name: BID
+        description: "The bid price for the trade."
+        tests:
+          - not_null
+
+      - name: TRANSACTION_ID
+        description: "A unique identifier for the transaction to ensure each trade is distinctly recorded."
+        tests:
+          - not_null
+
+      - name: IS_MULTIHOUR_BLOCK
+        description: "Indicates whether the trade spans multiple hours."
+        tests:
+          - not_null
+
+      - name: CREDIT
+        description: "The credit associated with the trade, possibly reflecting the trade's financial arrangement or the trader's creditworthiness."
+        tests:
+          - not_null
+
